@@ -18,16 +18,17 @@ public class StartUp {
     System.out.println("Recommendations for user id:"+ userId);
     
     System.out.println("User to user:");
-    AbstractRecommender userToUser = new UserToUserRecommender(FILE_NAME);
-    List<RecommendedItem> userBasedRecommendations = userToUser.recommend(userId, NUMBER_OF_RECOMMENDATIONS);
-    for (RecommendedItem recommendation : userBasedRecommendations) {
-      System.out.println(recommendation);
-    }
+    printRecommendations(new UserToUserRecommender(FILE_NAME), userId);
+
     
     System.out.println("Item to Item:");
-    AbstractRecommender itemToItem = new ItemToItemRecommender(FILE_NAME);
-    List<RecommendedItem> itemBasedRecommendations = itemToItem.recommend(userId, NUMBER_OF_RECOMMENDATIONS);
-    for (RecommendedItem recommendation : itemBasedRecommendations) {
+    printRecommendations(new ItemToItemRecommender(FILE_NAME), userId);
+  
+  }
+  
+  private static void printRecommendations(AbstractRecommender recommender,int userId) throws TasteException{
+    List<RecommendedItem> recommendations = recommender.recommend(userId, NUMBER_OF_RECOMMENDATIONS);
+    for (RecommendedItem recommendation : recommendations) {
       System.out.println(recommendation);
     }
 

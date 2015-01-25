@@ -12,12 +12,12 @@ import org.apache.mahout.cf.taste.similarity.UserSimilarity;
 /**
  * A simple Recommender which uses the file at the given path to produce recommendations based on
  * user similarity.
- * @author alexanderbrommer
- *
  */
 public class UserToUserRecommender extends AbstractRecommender{
 
-  //TODO Comments
+  /**
+   * Create a new UserToUserRecommender for the specified file
+   */
   public UserToUserRecommender(String filePath) throws IOException, TasteException {
     super(filePath);
     UserSimilarity similarity = new PearsonCorrelationSimilarity(dataModel);

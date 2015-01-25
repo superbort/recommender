@@ -10,13 +10,13 @@ import org.apache.mahout.cf.taste.similarity.ItemSimilarity;
 /**
  * A simple Recommender which uses the file at the given path to produce recommendations based on
  * item similarity.
- * 
- * @author alexanderbrommer
- *
  */
 public class ItemToItemRecommender extends AbstractRecommender {
 
-  //TODO: Comments
+  /**
+   * Create a new ItemToItemRecommender for the specified file
+   * @param filePath path to the file 
+   */
   public ItemToItemRecommender(String filePath) throws IOException, TasteException {
     super(filePath);
     // we could also use GenericItemSimilarity here for better performance

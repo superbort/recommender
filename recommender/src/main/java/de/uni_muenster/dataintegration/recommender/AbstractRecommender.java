@@ -10,14 +10,29 @@ import org.apache.mahout.cf.taste.model.DataModel;
 import org.apache.mahout.cf.taste.recommender.RecommendedItem;
 import org.apache.mahout.cf.taste.recommender.Recommender;
 
+/**
+ * Abstract base class for recommenders
+ */
 public abstract class AbstractRecommender {
   
   protected DataModel dataModel;
   protected Recommender recommender;
   
-  //TODO: Comments
+  /**
+   * @throws IOException If the file can't be read
+   */
   public AbstractRecommender(String filePath) throws IOException {
     dataModel = new FileDataModel(getFile(filePath));
+  }
+
+  /**
+   * @param userId user for which recommendations are computed
+   * @param howMany desired number of recommendations
+   * @return List of recommended RecommendedItems, ordered from most strongly recommend to least
+   */
+  public List<RecommendedItem> recommend(int userId, int howMany) throws TasteException {
+    List<RecommendedItem> recommendedItems = recommender.recommend(userId, howMany);
+    return recommendedItems;
   }
 
   /**
@@ -30,16 +45,6 @@ public abstract class AbstractRecommender {
     ClassLoader classLoader = UserToUserRecommender.class.getClassLoader();
     File result = new File(classLoader.getResource(path).getFile());
     return result;
-  }
-
-  /**
-   * @param userId user for which recommendations are computed
-   * @param howMany desired number of recommendations
-   * @return List of recommended RecommendedItems, ordered from most strongly recommend to least
-   */
-  public List<RecommendedItem> recommend(int userId, int howMany) throws TasteException {
-    List<RecommendedItem> recommendedItems = recommender.recommend(userId, howMany);
-    return recommendedItems;
   }
 
 }
